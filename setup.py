@@ -8,11 +8,9 @@ except ImportError:
     from distutils.core import setup
 
 
-with open('README.rst') as readme_file:
+with open('README.md') as readme_file:
     readme = readme_file.read()
 
-with open('HISTORY.rst') as history_file:
-    history = history_file.read().replace('.. :changelog:', '')
 
 requirements = [
     # TODO: put package requirements here
@@ -26,7 +24,7 @@ setup(
     name='urljects',
     version='0.1.0',
     description="Django URLS rethinked",
-    long_description=readme + '\n\n' + history,
+    long_description=readme,
     author="Visgean Skeloru",
     author_email='visgean@gmail.com',
     url='https://github.com/visgean/urljects',
