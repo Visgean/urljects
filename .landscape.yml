@@ -1,0 +1,10 @@
+test-warnings: no
+max-line-length: 79
+uses:
+    - django
+autodetect: yes
+requirements:
+    - requirements.txt
+pylint:
+    disable:
+        - old-style-class
