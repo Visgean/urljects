@@ -26,9 +26,11 @@ Ugliness of Django routing system
 Adding new views in Django is done usually in two files: in ``views.py`` where most of the stuff go and then it is registered in ``urls.py``. 
 
 This sucks, especcially if you are using Class-Based-Views: 
+
 ```
 url(r'^add$', views.AddSource.as_view(), name='add'),
 ```
+
 I hate calling ``as_view`` method in ``urls.py```, this could have been resolved automatically!
 
 Another reason why writing urls causes me pain is because of Regular expressions. Yes they useful, they are nice. But they should not be ever-present  as they are in Django where you can't write a single url without it. But even worst they are error-prone. 
