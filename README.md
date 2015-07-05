@@ -36,20 +36,20 @@ Idea
 I would like to use something like this:
 
 ```python
-    from urljects import U, slug, pk
-    
-    url_patterns = (
-        url(U / 'detail' / slug, view=DetailView, name='detail'),
-    )
+from urljects import U, slug, pk
+
+url_patterns = (
+    url(U / 'detail' / slug, view=DetailView, name='detail'),
+)
 ```
 
 This code should be equivalent to this:
 
 ```python 
-    url_patterns = (
-        url(r'^detail/(?P<slug>[\w-]+)' , view=DetailView.as_view(), 
-            name='detail'),
-    )
+url_patterns = (
+    url(r'^detail/(?P<slug>[\w-]+)' , view=DetailView.as_view(), 
+        name='detail'),
+)
 ```
 
 URLs without explicit registration
@@ -65,9 +65,9 @@ One thing that I like about Django are models. You create file named ``models.py
 There is no reason why this should not work the same way with views:
 
 ```python
-    class ItemDetail(URLview, DetailView):
-           name = 'detail'
-           url = U / 'detail' / slug
+class ItemDetail(URLview, DetailView):
+       name = 'detail'
+       url = U / 'detail' / slug
 ```
 
 Decorator based registration
@@ -76,9 +76,9 @@ A lot of people enjoy decorator based urls:
 
 
 ```python
-    @url(U / 'detail' / slug)
-    def detail(request, slug)
-         ...
+@url(U / 'detail' / slug)
+def detail(request, slug)
+     ...
 ```
 
 Naming and namespace
