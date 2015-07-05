@@ -7,6 +7,9 @@ Django URL Objects - urljects
 [![Pypi](https://img.shields.io/pypi/v/urljects.svg)](https://pypi.python.org/pypi/urljects)
 
 
+**THIS MODULE IS IN DEVELOPMENT, THERE IS NO FUNCTIONALITY YET!**
+
+
 Ugliness of Django routing system
 ---------------------------------
 
