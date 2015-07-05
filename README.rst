@@ -15,10 +15,8 @@ Django URLS rethinked
 
 So, about a year ago I was thinking about this genial idea: I have seen a lot of python code dealing with paths. Lot of os.path.join methods... Well if you have worked with files in python you get the picture. So I had this idea: what if you could just type something like:
 
-```python
-
+```
 path = P / 'tmp' / 'file'
-
 ```
 and everything would be resolved magically. Well after couple of minutes of Googling I discovered [pathlib](https://docs.python.org/3/library/pathlib.html). This module is really brilliant. So it set me thinking: what else could be represented in this fashion: URLS! 
 
@@ -28,10 +26,8 @@ Ugliness of Django routing system
 Adding new views in Django is done usually in two files: in ``views.py`` where most of the stuff go and then it is registered in ``urls.py``. 
 
 This sucks, especcially if you are using Class-Based-Views: 
-```python
-
+```
 url(r'^add$', views.AddSource.as_view(), name='add'),
-
 ```
 I hate calling ``as_view`` method in ``urls.py```, this could have been resolved automatically!
 
@@ -49,8 +45,9 @@ Idea
 ------
 
 I would like to use something like this:
-```python
-from awesome_urls import U, slug, pk
+
+```
+from urljects import U, slug, pk
 
 url_patterns = (
     url(U / 'detail' / slug, view=DetailView, name='detail'),
@@ -78,7 +75,7 @@ One thing that I like about Django are models. You create file named ``models.py
 
 There is no reason why this should not work the same way with views:
 
-```python
+```
 
 class ItemDetail(URLview, DetailView):
        name = 'detail'
@@ -89,7 +86,7 @@ Decorator based registration
 --------------------------------------------
 A lot of people enjoy decorator based urls:
 
-```python
+```
 
 @url(U / 'detail' / slug)
 def detail(request, slug)
