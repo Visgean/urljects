@@ -1,4 +1,0 @@
-.. :changelog:
-
-History
--------
