@@ -1,28 +1,24 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""
-test_urljects
-----------------------------------
-
-Tests for `urljects` module.
-"""
-
 import unittest
 
-from urljects import urljects
+from urljects import U, slug
 
 
 class TestUrljects(unittest.TestCase):
+    def test_regulars(self):
+        test_data = [
+            [
+                r'^detail/(?P<slug>[\w-]+)',
+                U / 'detail' / slug
+            ]
+        ]
 
-    def setUp(self):
-        pass
+        for old, new in test_data:
+            print new
+            self.assertEqual(old, new.value)
 
-    def test_something(self):
-        pass
-
-    def tearDown(self):
-        pass
 
 if __name__ == '__main__':
     unittest.main()

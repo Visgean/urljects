@@ -13,11 +13,11 @@ with open('README.md') as readme_file:
 
 
 requirements = [
-    # TODO: put package requirements here
+    'django>=1.8'
 ]
 
 test_requirements = [
-    # TODO: put package test requirements here
+    'mock'
 ]
 
 setup(
@@ -31,8 +31,7 @@ setup(
     packages=[
         'urljects',
     ],
-    package_dir={'urljects':
-                 'urljects'},
+    package_dir={'urljects': 'urljects'},
     include_package_data=True,
     install_requires=requirements,
     license="BSD",
