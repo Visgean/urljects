@@ -16,7 +16,6 @@ class TestUrljects(unittest.TestCase):
         ]
 
         for old, new in test_data:
-            print new
             self.assertEqual(old, new.value)
 
 
