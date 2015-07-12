@@ -21,9 +21,9 @@ This sucks, especcially if you are using Class-Based-Views:
 url(r'^add$', views.AddSource.as_view(), name='add'),
 ```
 
-I hate calling ``as_view`` method in ``urls.py```, this could have been resolved automatically!
+I hate calling ``as_view`` method in ``urls.py``, this should be resolved automatically!
 
-Another reason why writing urls causes me pain is because of Regular expressions. Yes they useful, they are nice. But they should not be ever-present  as they are in Django where you can't write a single url without it. But even worst they are error-prone. 
+Another things that sucks in Django URLs is Regular expressions. Yes they useful, they are nice. But they should not be ever-present,  you can't even write a single url without it. 
 In reality there is not so many things people try to parse in Django urls:
 
  - Slugs ``(?P<slug>[\w-]+)``
@@ -31,7 +31,7 @@ In reality there is not so many things people try to parse in Django urls:
  - static strings ``(?P<section>body|footer)``
  - UUIDs ``(?P<uuid4>[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12})``
 
-These are common patterns and as you can see they are hard to remember and error prone. If you look at the StackOveflow you will find a lot of questions about this. 
+These are common patterns and as you can see they are hard to remember and error prone.
 
 Idea
 ------
