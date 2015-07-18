@@ -28,6 +28,7 @@ class URLPattern(object):
             part = part.pattern
 
         if self.value is None:
+            # This enables the U / '' syntax
             return URLPattern(
                 value=part,
                 separator=self.separator,
