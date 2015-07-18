@@ -1,6 +1,8 @@
 import re
 import patterns
 
+from django.conf.urls import url as django_url
+
 
 class URLPattern(object):
     """
@@ -60,3 +62,18 @@ class URLPattern(object):
 
 U = URLPattern()
 I = URLPattern(ends=False)
+
+
+def url(regex, view, kwargs=None, name=None, prefix=''):
+    """
+    This is replacement for ``django.conf.urls.url`` function.
+    This url auto calls ``as_view`` method for Class based views and resolves
+    URLPattern objects.
+    """
+    if isinstance(regex, URLPattern):
+        regex = regex.get_value()
+
+    if callable(view) and hasattr(view, 'as_view') and callable(view.as_view):
+        view = view.as_view()
+
+    return django_url(regex, view, kwargs, name, prefix)

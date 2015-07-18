@@ -1,4 +1,4 @@
-Django URL Objects - urljects
+Django URL Objects = urljects
 =============================
 
 
