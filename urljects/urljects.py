@@ -64,14 +64,32 @@ U = URLPattern()
 I = URLPattern(ends=False)
 
 
+def resolve_name(view):
+    """
+    Auto guesses name of the view.
+    For function it will be ``view.func_name``
+    For classes it will be ``view.name``
+    """
+    if hasattr(view, 'func_name'):
+        return view.func_name
+    if hasattr(view, 'name'):
+        return view.name
+    return None
+
+
 def url(regex, view, kwargs=None, name=None, prefix=''):
     """
     This is replacement for ``django.conf.urls.url`` function.
     This url auto calls ``as_view`` method for Class based views and resolves
     URLPattern objects.
+
+    If ``name`` is not specified it will try to guess it.
     """
     if isinstance(regex, URLPattern):
         regex = regex.get_value()
+
+    if name is None:
+        name = resolve_name(name)
 
     if callable(view) and hasattr(view, 'as_view') and callable(view.as_view):
         view = view.as_view()
