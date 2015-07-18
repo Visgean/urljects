@@ -11,10 +11,8 @@ Contents:
 
    readme
    installation
+   ways
    usage
-   contributing
-   authors
-   history
 
 Indices and tables
 ==================
