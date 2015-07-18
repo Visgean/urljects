@@ -55,3 +55,4 @@ class URLPattern(object):
 
 
 U = URLPattern()
+I = URLPattern(ends=False)
