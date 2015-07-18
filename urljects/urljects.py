@@ -74,6 +74,8 @@ def resolve_name(view):
         return view.func_name
     if hasattr(view, 'name'):
         return view.name
+    if isinstance(view, basestring):
+        return view.split('.')[-1]
     return None
 
 
