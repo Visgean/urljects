@@ -4,7 +4,7 @@
 import re
 import unittest
 
-from urljects import U, slug
+from urljects import I, U, slug
 
 
 class TestUrljects(unittest.TestCase):
@@ -12,6 +12,18 @@ class TestUrljects(unittest.TestCase):
         [
             r'^detail/(?P<slug>[\w-]+)$',
             U / 'detail' / slug
+        ],
+        [
+            r'^(?P<slug>[\w-]+)$',
+            U / slug
+        ],
+        [
+            r'^detail$',
+            U / 'detail'
+        ],
+        [
+            r'^products',
+            I / 'products'
         ],
     ]
 

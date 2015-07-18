@@ -28,7 +28,10 @@ class URLPattern(object):
             part = part.pattern
 
         if self.value is None:
-            return URLPattern(value=part)
+            return URLPattern(
+                value=part,
+                separator=self.separator,
+                ends=self.ends)
         else:
             self.value += self.separator + part
         return self

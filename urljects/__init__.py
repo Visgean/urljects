@@ -1,2 +1,2 @@
-from .urljects import U
+from .urljects import U, I
 from .patterns import slug
