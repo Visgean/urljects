@@ -8,8 +8,9 @@ except ImportError:
     from distutils.core import setup
 
 
-with open('README.md') as readme_file:
-    readme = readme_file.read()
+long_description = """
+Django URL routing system rethinked.
+"""
 
 
 requirements = [
@@ -22,7 +23,7 @@ test_requirements = [
 
 setup(
     name='urljects',
-    version='0.2',
+    version='0.2.2',
     description="Django URLS rethinked",
     long_description=readme,
     author="Visgean Skeloru",
