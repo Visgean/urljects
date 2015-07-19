@@ -58,11 +58,14 @@ class TestURLjects(unittest.TestCase):
 
 class TestURL(unittest.TestCase):
     """
-    Test that names are auto guesses correctly
+    Tests urljects.url function, basically this only tests that django internal
+    url function is being called correctly and since it is extensively tested
+    by django internal tests we can already assume that it is working if it is
+    being called correctly
     """
 
     @mock.patch('django.conf.urls.url')
-    def test_string_view(self, mocked_url):
+    def test_func_view(self, mocked_url):
         url(U, view=views.test_view, prefix='prefix')
         mocked_url.assert_called_once_with(
             regex='^$',
@@ -70,4 +73,15 @@ class TestURL(unittest.TestCase):
             kwargs=None,
             name='test_view',
             prefix='prefix'
+        )
+
+    @mock.patch('django.conf.urls.url')
+    def test_string_view(self, mocked_url):
+        url(U / 'test', view='views.test_view')
+        mocked_url.assert_called_once_with(
+            regex='^test$',
+            view='views.test_view',
+            kwargs=None,
+            name='test_view',
+            prefix=''
         )
