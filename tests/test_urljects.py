@@ -29,7 +29,7 @@ test_data = [
         new_url=U / 'static',
         view=None,
         name=None
-            ),
+    ),
     URLTest(
         old_url=r'^products',
         new_url=I / 'products',

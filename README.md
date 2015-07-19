@@ -55,13 +55,22 @@ url_patterns = (
 
 The name of view has been taken from ``DetailView.name``.
 
+
+Names
+-----
+
+URLjects tries to determine name of the view from ``func_name`` for function views. 
+For class views attribute ``name`` is expected. For functional views specified by 
+string last part of the view will be used.
+
+
 URLs without explicit registration
-============================
+==================================
 
 THIS IS NOT IMPLEMENTED YET.
 
 Class based views
-----------------------------
+-----------------
 
 The Django way of routing is to link views with regular expressions in silly files named ``urls.py``. It is silly cause every time you change/add/remove view you also have to change it in another file. 
 
@@ -76,7 +85,7 @@ class ItemDetail(URLview, DetailView):
 ```
 
 Decorator based registration
---------------------------------------------
+----------------------------
 A lot of people enjoy decorator based urls:
 
 
@@ -87,7 +96,7 @@ def detail(request, slug)
 ```
 
 Naming and namespace
---------------------------------------
+--------------------
 
 View names and namespaces should be automatically resolved. 
 Namespace should be derived from app label and view name should be derived form function / class name. 
