@@ -46,6 +46,9 @@ class URLPattern(object):
         :return: raw string
         """
         value = self.value
+        if value is None:
+            value = patterns.beginning
+
         if self.value[0] != patterns.beginning:
             value = patterns.beginning + self.value
 
