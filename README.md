@@ -7,8 +7,6 @@ Django URL Objects = urljects
 [![Pypi](https://img.shields.io/pypi/v/urljects.svg)](https://pypi.python.org/pypi/urljects)
 [![Code Health](https://landscape.io/github/Visgean/urljects/master/landscape.svg?style=flat)](https://landscape.io/github/Visgean/urljects/master)
 
-**THIS MODULE IS IN DEVELOPMENT, THERE IS NO FUNCTIONALITY YET!**
-
 
 Ugliness of Django routing system
 ---------------------------------
