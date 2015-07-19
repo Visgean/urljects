@@ -9,7 +9,15 @@ The way of file
 ---------------
 
 This is pretty standard way of dealing with routing, you put your urls into
-file called ``urls.py`` and register that file with django. Nice and tidy.
+file called ``urls.py`` and register that file with django. Nice and tidy. ::
+
+    from urljects import url, U, slug
+    from views import main_view, ClassView
+
+    urlpatterns = ('',
+        url(U / 'main', main_view),
+        url(U / slug / 'classy', ClassView)
+    )
 
 
 The way of decorator
