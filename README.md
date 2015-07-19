@@ -94,10 +94,3 @@ A lot of people enjoy decorator based urls:
 def detail(request, slug)
      ...
 ```
-
-Naming and namespace
---------------------
-
-View names and namespaces should be automatically resolved. 
-Namespace should be derived from app label and view name should be derived form function / class name. 
-
