@@ -31,20 +31,20 @@ In reality there is not so many things people try to parse in Django urls:
 
 These are common patterns and as you can see they are hard to remember and error prone.
 
-Idea
-------
+The way of URLjects
+-------------------
 
-I would like to use something like this:
+In URLjects you can write this
 
 ```python
-from urljects import U, slug, pk
+from urljects import U, slug
 
 url_patterns = (
-    url(U / 'detail' / slug, view=DetailView, name='detail'),
+    url(U / 'detail' / slug, view=DetailView),
 )
 ```
 
-This code should be equivalent to this:
+This code is equivalent to this:
 
 ```python 
 url_patterns = (
@@ -52,6 +52,8 @@ url_patterns = (
         name='detail'),
 )
 ```
+
+The name of view has been taken from ``DetailView.name``.
 
 URLs without explicit registration
 ============================
