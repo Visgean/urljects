@@ -85,3 +85,14 @@ class TestURL(unittest.TestCase):
             name='test_view',
             prefix=''
         )
+
+    @mock.patch('django.conf.urls.url')
+    def test_class_view(self, mocked_url):
+        url(U / 'class_view', view=views.ClassTestView)
+        mocked_url.assert_called_once_with(
+            regex='^class_view$',
+            view=views.ClassTestView.as_view(),
+            kwargs=None,
+            name=views.ClassTestView.name,
+            prefix=''
+        )
