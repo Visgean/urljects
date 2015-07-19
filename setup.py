@@ -25,7 +25,7 @@ setup(
     name='urljects',
     version='0.2.2',
     description="Django URLS rethinked",
-    long_description=readme,
+    long_description=long_description,
     author="Visgean Skeloru",
     author_email='visgean@gmail.com',
     url='https://github.com/visgean/urljects',

@@ -58,6 +58,8 @@ The name of view has been taken from ``DetailView.name``.
 URLs without explicit registration
 ============================
 
+THIS IS NOT IMPLEMENTED YET.
+
 Class based views
 ----------------------------
 
