@@ -1,5 +1,5 @@
-Welcome to urljects's documentation!
-====================================
+URLjects - Django routing rethinked
+===================================
 
 THIS MODULE IS IN DEVELOPMENT, THERE IS NO FUNCTIONALITY YET!
 
