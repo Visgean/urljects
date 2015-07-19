@@ -3,9 +3,11 @@
 
 import re
 import unittest
+import mock
+import views
 
 from collections import namedtuple
-from urljects import I, U, slug
+from urljects import I, U, slug, url
 
 
 URLTest = namedtuple('URLTest', ['old_url', 'new_url', 'view', 'name'])
@@ -39,6 +41,9 @@ test_data = [
 
 class TestURLjects(unittest.TestCase):
     def test_regulars(self):
+        """
+        Test that old_url is same as new_url
+        """
         for url_test in test_data:
             self.assertEqual(url_test.old_url, url_test.new_url.get_value())
 
@@ -51,5 +56,18 @@ class TestURLjects(unittest.TestCase):
             re.compile(pattern.get_value())
 
 
-if __name__ == '__main__':
-    unittest.main()
+class TestURL(unittest.TestCase):
+    """
+    Test that names are auto guesses correctly
+    """
+
+    @mock.patch('django.conf.urls.url')
+    def test_string_view(self, mocked_url):
+        url(U, view=views.test_view, prefix='prefix')
+        mocked_url.assert_called_once_with(
+            regex='^$',
+            view=views.test_view,
+            kwargs=None,
+            name='test_view',
+            prefix='prefix'
+        )

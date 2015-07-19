@@ -1,7 +1,7 @@
 import re
 import patterns
 
-from django.conf.urls import url as django_url
+from django.conf import urls
 
 
 class URLPattern(object):
@@ -94,9 +94,14 @@ def url(regex, view, kwargs=None, name=None, prefix=''):
         regex = regex.get_value()
 
     if name is None:
-        name = resolve_name(name)
+        name = resolve_name(view)
 
     if callable(view) and hasattr(view, 'as_view') and callable(view.as_view):
         view = view.as_view()
 
-    return django_url(regex, view, kwargs, name, prefix)
+    return urls.url(
+        regex=regex,
+        view=view,
+        kwargs=kwargs,
+        name=name,
+        prefix=prefix)
