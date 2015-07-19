@@ -12,3 +12,4 @@ Contents:
    readme
    installation
    ways
+   names
