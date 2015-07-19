@@ -22,7 +22,7 @@ test_requirements = [
 
 setup(
     name='urljects',
-    version='0.1.0',
+    version='0.2',
     description="Django URLS rethinked",
     long_description=readme,
     author="Visgean Skeloru",
