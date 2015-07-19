@@ -12,12 +12,3 @@ Contents:
    readme
    installation
    ways
-   usage
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
