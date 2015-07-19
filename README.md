@@ -44,7 +44,7 @@ url_patterns = (
 )
 ```
 
-This code is equivalent to this:
+which is equivalent to this:
 
 ```python 
 url_patterns = (
