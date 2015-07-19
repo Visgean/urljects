@@ -49,10 +49,10 @@ class URLPattern(object):
         if value is None:
             value = patterns.beginning
 
-        if self.value[0] != patterns.beginning:
-            value = patterns.beginning + self.value
+        if value[0] != patterns.beginning:
+            value = patterns.beginning + value
 
-        if self.ends and self.value[-1] != patterns.end:
+        if self.ends and value[-1] != patterns.end:
             value += patterns.end
         return value
 
