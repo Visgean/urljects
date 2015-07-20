@@ -89,6 +89,13 @@ def url(regex, view, kwargs=None, name=None, prefix=''):
     URLPattern objects.
 
     If ``name`` is not specified it will try to guess it.
+
+    :param regex: string with regular expression or URLPattern
+    :type regex: URLPattern
+    :param view: function/string/class of the view
+    :param kwargs: kwargs that are to be passed to view
+    :param name: name of the view, if empty it will be guessed
+    :param prefix: useless, use view namespaces
     """
     if isinstance(regex, URLPattern):
         regex = regex.get_value()
@@ -105,3 +112,11 @@ def url(regex, view, kwargs=None, name=None, prefix=''):
         kwargs=kwargs,
         name=name,
         prefix=prefix)
+
+
+def view_include(view):
+    """
+
+    :param view:
+    :return:
+    """

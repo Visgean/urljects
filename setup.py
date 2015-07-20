@@ -14,7 +14,8 @@ Django URL routing system rethinked.
 
 
 requirements = [
-    'django>=1.8'
+    'django>=1.8',
+    'six',
 ]
 
 test_requirements = [
