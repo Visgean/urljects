@@ -95,7 +95,7 @@ def url(regex, view, kwargs=None, name=None, prefix=''):
     :param view: function/string/class of the view
     :param kwargs: kwargs that are to be passed to view
     :param name: name of the view, if empty it will be guessed
-    :param prefix: useless, use view namespaces
+    :param prefix: useless, use namespaces
     """
     if isinstance(regex, URLPattern):
         regex = regex.get_value()
