@@ -5,7 +5,7 @@ def test_view():
 
 
 class ClassTestView(object):
-    name = 'class_test_view'
+    url_name = 'class_test_view'
 
     @staticmethod
     def as_view():
