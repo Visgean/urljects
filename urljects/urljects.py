@@ -1,10 +1,10 @@
 import re
-import patterns
 import six
 import inspect
 import functools
 
 from django.conf import urls
+from . import patterns
 
 
 class URLPattern(object):

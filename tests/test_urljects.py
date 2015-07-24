@@ -4,7 +4,7 @@
 import re
 import unittest
 import mock
-import views
+from . import views
 
 from collections import namedtuple
 from urljects import I, U, slug, url
