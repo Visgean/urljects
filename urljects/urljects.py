@@ -137,8 +137,8 @@ def resolve_name(view):
     For function it will be ``view.func_name``
     For classes it will be ``view.url_name``
     """
-    if hasattr(view, 'func_name'):
-        return view.func_name
+    if inspect.isfunction(view):
+        return view.__name__
     if hasattr(view, 'url_name'):
         return view.url_name
     if isinstance(view, six.string_types):
