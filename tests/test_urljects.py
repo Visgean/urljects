@@ -4,10 +4,11 @@
 import re
 import unittest
 import mock
-from . import views
 
 from collections import namedtuple
+
 from urljects import I, U, slug, url
+from . import views
 
 
 URLTest = namedtuple('URLTest', ['old_url', 'new_url', 'view', 'name'])
