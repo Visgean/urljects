@@ -93,6 +93,6 @@ class TestURL(unittest.TestCase):
             regex='^class_view$',
             view=views.ClassTestView.as_view(),
             kwargs=None,
-            name=views.ClassTestView.name,
+            name=views.ClassTestView.url_name,
             prefix=''
         )
