@@ -2,6 +2,7 @@ import re
 import six
 import inspect
 import functools
+import importlib
 
 from django.conf import urls
 from . import patterns
@@ -194,7 +195,7 @@ def view_include(view_module, namespace=None, app_name=None):
     view_patterns = []
 
     if isinstance(view_module, six.string_types):
-        view_module = __import__(view_module)
+        view_module = importlib.import_module(view_module)
 
     for member in inspect.getmembers(view_module):
         is_class_view = inspect.isclass(member) and issubclass(member, URLView)
