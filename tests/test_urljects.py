@@ -6,12 +6,15 @@ import unittest
 import mock
 import os
 
+from django.core.urlresolvers import reverse
 from collections import namedtuple
 from urljects import I, U, slug, url
 from . import views
 
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tests.settings")
+
+
 
 
 URLTest = namedtuple('URLTest', ['old_url', 'new_url', 'view', 'name'])
@@ -100,3 +103,38 @@ class TestURL(unittest.TestCase):
             name=views.ClassTestView.url_name,
             prefix=''
         )
+
+
+class TestAPP(unittest.TestCase):
+    """
+    This tests Django integration without mocking.
+    URLs are registered in ``main_url_conf.py``
+    """
+
+    reverse(viewname='test_view')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -147,7 +147,7 @@ def resolve_name(view):
     return None
 
 
-def url(regex, view, kwargs=None, name=None, prefix=''):
+def url(url_pattern, view, kwargs=None, name=None, prefix=''):
     """
     This is replacement for ``django.conf.urls.url`` function.
     This url auto calls ``as_view`` method for Class based views and resolves
@@ -155,15 +155,15 @@ def url(regex, view, kwargs=None, name=None, prefix=''):
 
     If ``name`` is not specified it will try to guess it.
 
-    :param regex: string with regular expression or URLPattern
-    :type regex: URLPattern
+    :param url_pattern: string with regular expression or URLPattern
+    :type url_pattern: URLPattern
     :param view: function/string/class of the view
     :param kwargs: kwargs that are to be passed to view
     :param name: name of the view, if empty it will be guessed
     :param prefix: useless, use namespaces
     """
-    if isinstance(regex, URLPattern):
-        regex = regex.get_value()
+    if isinstance(url_pattern, URLPattern):
+        url_pattern = url_pattern.get_value()
 
     if name is None:
         name = resolve_name(view)
@@ -172,7 +172,7 @@ def url(regex, view, kwargs=None, name=None, prefix=''):
         view = view.as_view()
 
     return urls.url(
-        regex=regex,
+        regex=url_pattern,
         view=view,
         kwargs=kwargs,
         name=name,

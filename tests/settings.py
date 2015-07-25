@@ -1,6 +1,5 @@
 # Minimalistic django settings necessary to run the tests
 
 DEBUG = True
-
-INSTALLED_APPS = ()
-ROOT_URLCONF = 'main_url_conf'
+ROOT_URLCONF = 'tests.main_url_conf'
+SECRET_KEY = 'Guard of the Citadel indeed.'
