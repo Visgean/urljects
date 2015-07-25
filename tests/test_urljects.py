@@ -12,11 +12,6 @@ from urljects import I, U, slug, url
 from . import views
 
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tests.settings")
-
-
-
-
 URLTest = namedtuple('URLTest', ['old_url', 'new_url', 'view', 'name'])
 test_data = [
     URLTest(
@@ -111,8 +106,14 @@ class TestAPP(unittest.TestCase):
     URLs are registered in ``main_url_conf.py``
     """
 
-    reverse(viewname='test_view')
+    def setUp(self):
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tests.settings")
 
+    def test_function_view(self):
+        self.assertEqual(reverse(viewname='test_view'), u'/test_view')
+
+    # def test_class_view(self):
+        # self.assertEqual(reverse(viewname='class_test_view'), u'/class_view')
 
 
 
