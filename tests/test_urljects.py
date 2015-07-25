@@ -4,11 +4,14 @@
 import re
 import unittest
 import mock
+import os
 
 from collections import namedtuple
-
 from urljects import I, U, slug, url
 from . import views
+
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
 
 
 URLTest = namedtuple('URLTest', ['old_url', 'new_url', 'view', 'name'])
