@@ -49,24 +49,28 @@ class URLPattern(object):
             self.value += self.separator + part
         return self
 
-    def get_value(self):
+    def get_value(self, ends_override=None):
         """
         This function finishes the url pattern creation by adding starting
         character ^ end possibly by adding end character at the end
+
+        :param ends_override: overrides ``self.ends``
         :return: raw string
         """
         value = self.value
+        ends = self.ends if ends_override is not None else ends_override
+
         if value is None:
             value = beginning
 
         if value[0] != beginning:
             value = beginning + value
 
-        if self.ends and value[-1] != end:
+        if ends and value[-1] != end:
             value += end
 
         # included views usually ends with separator
-        if not self.ends and value[-1] != self.separator:
+        if not ends and value[-1] != self.separator:
             value += self.separator
 
         return value
@@ -88,4 +92,3 @@ class URLPattern(object):
 
 
 U = URLPattern()
-I = URLPattern(ends=False)

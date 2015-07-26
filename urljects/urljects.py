@@ -90,7 +90,10 @@ def url(url_pattern, view, kwargs=None, name=None, prefix=''):
     :param prefix: useless, use namespaces
     """
     if isinstance(url_pattern, URLPattern):
-        url_pattern = url_pattern.get_value()
+        if isinstance(view, tuple):  # this is included view
+            url_patterns = url_pattern.get_value(ends_override=False)
+        else:
+            url_pattern = url_pattern.get_value()
 
     if name is None:
         name = resolve_name(view)
