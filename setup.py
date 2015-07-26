@@ -7,6 +7,7 @@ try:
 except ImportError:
     from distutils.core import setup
 
+from urljects import __version__
 
 long_description = """
 Django URL routing system rethinked.
@@ -24,7 +25,7 @@ test_requirements = [
 
 setup(
     name='urljects',
-    version='1.0.0',
+    version=__version__,
     description="Django URLS rethinked",
     long_description=long_description,
     author="Visgean Skeloru",
