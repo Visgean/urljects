@@ -1,4 +1,4 @@
-Django URL Objects = urljects
+Django URL Objects = URLjects
 =============================
 
 [![Join the chat at https://gitter.im/Visgean/urljects](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Visgean/urljects?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
@@ -10,33 +10,11 @@ Django URL Objects = urljects
 [![Code Health](https://landscape.io/github/Visgean/urljects/master/landscape.svg?style=flat)](https://landscape.io/github/Visgean/urljects/master)
 
 
-Ugliness of Django routing system
----------------------------------
 
-Adding new views in Django is done usually in two files: in ``views.py`` where most of the stuff go and then it is registered in ``urls.py``. 
+URLjects Patterns
+-----------------
 
-This sucks, especcially if you are using Class-Based-Views: 
-
-```
-url(r'^add$', views.AddSource.as_view(), name='add'),
-```
-
-I hate calling ``as_view`` method in ``urls.py``, this should be resolved automatically!
-
-Another things that sucks in Django URLs is Regular expressions. Yes they useful, they are nice. But they should not be ever-present,  you can't even write a single url without it. 
-In reality there is not so many things people try to parse in Django urls:
-
- - Slugs ``(?P<slug>[\w-]+)``
- - IDs ``(?P<pk>\d+)``
- - static strings ``(?P<section>body|footer)``
- - UUIDs ``(?P<uuid4>[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12})``
-
-These are common patterns and as you can see they are hard to remember and error prone.
-
-The way of URLjects
--------------------
-
-In URLjects you can write this
+With URLjects you can write this
 
 ```python
 from urljects import U, slug
@@ -46,7 +24,7 @@ url_patterns = (
 )
 ```
 
-which is equivalent to this:
+instead of this:
 
 ```python 
 url_patterns = (
@@ -55,44 +33,29 @@ url_patterns = (
 )
 ```
 
-The name of view has been taken from ``DetailView.name``.
+The name of the view has been taken from ``DetailView.url_name``.
+There are also some common regular patterns like slugs and UUIDs so that you
+can focus on more important stuff than on debugging regular expressions.
 
 
-Names
------
+Routing without urls.py
+-----------------------
 
-URLjects tries to determine name of the view from ``func_name`` for function views. 
-For class views attribute ``name`` is expected. For functional views specified by 
-string last part of the view will be used.
+With the use of ``include_view()`` you can avoid using included ``urls.py``
+and include views directly. 
 
-
-URLs without explicit registration
-==================================
-
-THIS IS NOT IMPLEMENTED YET.
-
-Class based views
------------------
-
-The Django way of routing is to link views with regular expressions in silly files named ``urls.py``. It is silly cause every time you change/add/remove view you also have to change it in another file. 
-
-One thing that I like about Django are models. You create file named ``models.py`` add some models and you are good to go. No registration. 
-
-There is no reason why this should not work the same way with views:
+For class based views simply inherit from ``URLView``.
 
 ```python
-class ItemDetail(URLview, DetailView):
-       name = 'detail'
-       url = U / 'detail' / slug
+class ItemDetail(URLView, DetailView):
+    name = 'detail'
+    url = U / 'detail' / slug
 ```
 
-Decorator based registration
-----------------------------
-A lot of people enjoy decorator based urls:
-
+a lot of people enjoy functional views, for those there is ``url_view`` decorator.
 
 ```python
-@url(U / 'detail' / slug)
+@url_view(U / 'detail' / slug)
 def detail(request, slug)
-     ...
+    ...
 ```
