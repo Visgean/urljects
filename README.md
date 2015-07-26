@@ -1,6 +1,8 @@
 Django URL Objects = urljects
 =============================
 
+[![Join the chat at https://gitter.im/Visgean/urljects](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Visgean/urljects?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 
 [![Travis CL](https://img.shields.io/travis/Visgean/urljects.svg)](https://travis-ci.org/Visgean/urljects)
 [![Documentation Status](https://readthedocs.org/projects/urljects/badge/?version=latest)](https://urljects.readthedocs.org/en/latest/)
