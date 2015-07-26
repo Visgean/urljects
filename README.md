@@ -1,13 +1,11 @@
 Django URL Objects = URLjects
 =============================
 
-[![Join the chat at https://gitter.im/Visgean/urljects](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Visgean/urljects?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-
 [![Travis CL](https://img.shields.io/travis/Visgean/urljects.svg)](https://travis-ci.org/Visgean/urljects)
 [![Documentation Status](https://readthedocs.org/projects/urljects/badge/?version=latest)](https://urljects.readthedocs.org/en/latest/)
 [![Pypi](https://img.shields.io/pypi/v/urljects.svg)](https://pypi.python.org/pypi/urljects)
 [![Code Health](https://landscape.io/github/Visgean/urljects/master/landscape.svg?style=flat)](https://landscape.io/github/Visgean/urljects/master)
+[![Join the chat at https://gitter.im/Visgean/urljects](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Visgean/urljects)
 
 
 
