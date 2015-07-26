@@ -24,8 +24,8 @@ def url_view(url_pattern, name=None):
     Decorator for registering functional views.
     Meta decorator syntax has to be used in order to accept arguments.
 
-    This decorator does not really do anything that magical, you could achieve
-
+    This decorator does not really do anything that magical:
+    
     This:
     >>> from urljects import U, url_view
     >>> @url_view(U / 'my_view')
