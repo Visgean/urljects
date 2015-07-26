@@ -58,6 +58,11 @@ class URLPattern(object):
 
         if self.ends and value[-1] != patterns.end:
             value += patterns.end
+
+        # included views usually ends with separator
+        if not self.ends and value[-1] != self.separator:
+            value += self.separator
+
         return value
 
     def __div__(self, other):
@@ -71,7 +76,6 @@ class URLPattern(object):
         PY3 division
         """
         return self.add_part(other)
-
 
     def __repr__(self):
         return self.get_value() or ''
@@ -197,12 +201,13 @@ def view_include(view_module, namespace=None, app_name=None):
     if isinstance(view_module, six.string_types):
         view_module = importlib.import_module(view_module)
 
-    for member in inspect.getmembers(view_module):
+    for member_name, member in inspect.getmembers(view_module):
         is_class_view = inspect.isclass(member) and issubclass(member, URLView)
         is_func_view = (inspect.isfunction(member)
                         and hasattr(member, 'urljects_view')
                         and member.urljects_view)
-        if is_class_view or is_func_view:
+
+        if (is_class_view and member is not URLView) or is_func_view:
             view_patterns.append(url(member.url, member, name=member.url_name))
 
     return urls.include(

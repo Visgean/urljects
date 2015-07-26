@@ -1,5 +1,6 @@
 from django.views.generic.base import View
 
+
 def test_view():
     pass
 
