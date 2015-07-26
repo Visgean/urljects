@@ -43,7 +43,7 @@ def url_view(url_pattern, name=None):
     register all views that have ``urljects_view`` set to ``True``.
 
     :param url_pattern: regex or URLPattern or anything passable to url()
-    :param name: name of the view, func_name will be used otherwise.
+    :param name: name of the view, __name__ will be used otherwise.
     """
 
     def meta_wrapper(func):
@@ -53,7 +53,7 @@ def url_view(url_pattern, name=None):
 
         wrapper.urljects_view = True
         wrapper.url = url_pattern
-        wrapper.url_name = name or func.func_name
+        wrapper.url_name = name or func.__name__
 
         return wrapper
     return meta_wrapper
@@ -62,7 +62,7 @@ def url_view(url_pattern, name=None):
 def resolve_name(view):
     """
     Auto guesses name of the view.
-    For function it will be ``view.func_name``
+    For function it will be ``view.__name__``
     For classes it will be ``view.url_name``
     """
     if inspect.isfunction(view):
