@@ -10,7 +10,7 @@ except ImportError:
 from urljects import __version__
 
 long_description = """
-Django URL routing system rethinked.
+Django URL routing system DRYed.
 """
 
 
@@ -26,7 +26,7 @@ test_requirements = [
 setup(
     name='urljects',
     version=__version__,
-    description="Django URLS rethinked",
+    description="Django URLS DRYed.",
     long_description=long_description,
     author="Visgean Skeloru",
     author_email='visgean@gmail.com',
@@ -41,6 +41,7 @@ setup(
     zip_safe=False,
     keywords='urljects',
     classifiers=[
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Natural Language :: English',
