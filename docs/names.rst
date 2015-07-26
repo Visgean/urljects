@@ -1,5 +1,5 @@
 View name handling
-------------------
+==================
 
 If you don't specify name to ``urljects.url`` it will be derived automatically.
 
