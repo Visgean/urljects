@@ -8,4 +8,5 @@ URLjects - Django routing rethinked
    readme
    installation
    usage
+   u_object
    names

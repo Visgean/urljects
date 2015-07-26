@@ -5,8 +5,8 @@ Under URLjects there are three main ways of urls. You should stick to one and
 avoid mixing them.
 
 
-The way of file
----------------
+Using in urls.py
+----------------
 
 This is pretty standard way of dealing with routing, you put your urls into
 file called ``urls.py`` and register that file with django. Nice and tidy. ::
