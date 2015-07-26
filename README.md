@@ -15,7 +15,7 @@ URLjects Patterns
 With URLjects you can write this
 
 ```python
-from urljects import U, slug
+from urljects import U, slug, url
 
 url_patterns = (
     url(U / 'detail' / slug, view=DetailView),
