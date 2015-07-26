@@ -7,8 +7,6 @@ try:
 except ImportError:
     from distutils.core import setup
 
-from urljects.version import __version__
-
 long_description = """
 Django URL routing system DRYed.
 """
@@ -25,7 +23,7 @@ test_requirements = [
 
 setup(
     name='urljects',
-    version=__version__,
+    version='1.0.2',
     description="Django URLS DRYed.",
     long_description=long_description,
     author="Visgean Skeloru",
