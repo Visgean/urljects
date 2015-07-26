@@ -8,7 +8,7 @@ import os
 
 from django.core.urlresolvers import reverse
 from collections import namedtuple
-from urljects import I, U, slug, url
+from urljects import U, slug, url
 from . import views
 
 
@@ -29,12 +29,6 @@ test_data = [
     URLTest(
         old_url=r'^static$',
         new_url=U / 'static',
-        view=None,
-        name=None
-    ),
-    URLTest(
-        old_url=r'^products/',
-        new_url=I / 'products',
         view=None,
         name=None
     ),

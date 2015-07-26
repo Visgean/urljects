@@ -58,7 +58,7 @@ class URLPattern(object):
         :return: raw string
         """
         value = self.value
-        ends = self.ends if ends_override is not None else ends_override
+        ends = ends_override if ends_override is not None else self.ends
 
         if value is None:
             value = beginning
