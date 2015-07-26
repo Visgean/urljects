@@ -91,7 +91,7 @@ def url(url_pattern, view, kwargs=None, name=None, prefix=''):
     """
     if isinstance(url_pattern, URLPattern):
         if isinstance(view, tuple):  # this is included view
-            url_patterns = url_pattern.get_value(ends_override=False)
+            url_pattern = url_pattern.get_value(ends_override=False)
         else:
             url_pattern = url_pattern.get_value()
 
