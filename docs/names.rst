@@ -9,7 +9,7 @@ Functional views
 
     url(U, view=views.test_view)
 
-here ``view.func_name`` will be used.
+here ``view.__name__`` will be used.
 
 String views
 ------------
@@ -26,6 +26,10 @@ Class Views
 
     url(U / 'class_view', view=views.ClassTestView)
 
-``ClassTestView.name`` will be used.
+``ClassTestView.url_name`` will be used.
 
 
+Namespace
+---------
+
+So far there is no support for auto-guessing namespaces based on app. 
