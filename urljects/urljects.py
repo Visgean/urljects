@@ -83,7 +83,6 @@ def url(url_pattern, view, kwargs=None, name=None, prefix=''):
     If ``name`` is not specified it will try to guess it.
 
     :param url_pattern: string with regular expression or URLPattern
-    :type url_pattern: URLPattern
     :param view: function/string/class of the view
     :param kwargs: kwargs that are to be passed to view
     :param name: name of the view, if empty it will be guessed
