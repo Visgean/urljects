@@ -8,9 +8,8 @@ import os
 
 from django.core.urlresolvers import reverse
 from collections import namedtuple
-from urljects import I, U, slug, url, view_include
+from urljects import I, U, slug, url
 from . import views
-from included_app import views as included_views
 
 
 URLTest = namedtuple('URLTest', ['old_url', 'new_url', 'view', 'name'])
@@ -112,11 +111,9 @@ class TestAPP(unittest.TestCase):
         self.assertEqual(reverse(viewname='IncludedView'),
                          u'/included/IncludedView')
 
-
     def test_named_included_views(self):
         self.assertEqual(reverse(viewname='named:included_view'),
                          u'/included/included_view')
 
         self.assertEqual(reverse(viewname='named:IncludedView'),
                          u'/included/IncludedView')
-

@@ -1,88 +1,10 @@
-import re
 import six
 import inspect
 import functools
 import importlib
 
 from django.conf import urls
-from . import patterns
-
-
-class URLPattern(object):
-    """
-    This is the main urljects object, it is able to join strings and
-    regular expressions. The value of this object will always be regular
-    expression usable in django url.
-    """
-
-    def __init__(self, value=None, separator=patterns.SEPARATOR, ends=True):
-        """
-        :param value: Initial value of the URL
-        :param separator: used to separate parts of the url, usually /
-        :param ends: open urls should be used only for included urls
-        """
-        self.value = value
-        self.separator = separator
-        self.ends = ends
-
-    def add_part(self, part):
-        """
-        Function for adding partial pattern to the value
-        :param part: string or compiled pattern
-        """
-        if isinstance(part, re._pattern_type):
-            part = part.pattern
-
-        if self.value is None:
-            # This enables the U / '' syntax
-            return URLPattern(
-                value=part,
-                separator=self.separator,
-                ends=self.ends)
-        else:
-            self.value += self.separator + part
-        return self
-
-    def get_value(self):
-        """
-        This function finishes the url pattern creation by adding starting
-        character ^ end possibly by adding end character at the end
-        :return: raw string
-        """
-        value = self.value
-        if value is None:
-            value = patterns.beginning
-
-        if value[0] != patterns.beginning:
-            value = patterns.beginning + value
-
-        if self.ends and value[-1] != patterns.end:
-            value += patterns.end
-
-        # included views usually ends with separator
-        if not self.ends and value[-1] != self.separator:
-            value += self.separator
-
-        return value
-
-    def __div__(self, other):
-        """
-        PY2 division
-        """
-        return self.add_part(other)
-
-    def __truediv__(self, other):
-        """
-        PY3 division
-        """
-        return self.add_part(other)
-
-    def __repr__(self):
-        return self.get_value() or ''
-
-
-U = URLPattern()
-I = URLPattern(ends=False)
+from .patterns import URLPattern
 
 
 class URLView(object):
@@ -105,6 +27,7 @@ def url_view(url_pattern, name=None):
     This decorator does not really do anything that magical, you could achieve
 
     This:
+    >>> from urljects import U, url_view
     >>> @url_view(U / 'my_view')
     ... def my_view(request)
     ...     pass
