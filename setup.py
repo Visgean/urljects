@@ -24,7 +24,7 @@ test_requirements = [
 
 setup(
     name='urljects',
-    version='0.2.2',
+    version='1.0.0',
     description="Django URLS rethinked",
     long_description=long_description,
     author="Visgean Skeloru",
@@ -40,7 +40,6 @@ setup(
     zip_safe=False,
     keywords='urljects',
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Natural Language :: English',
