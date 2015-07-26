@@ -7,7 +7,7 @@ try:
 except ImportError:
     from distutils.core import setup
 
-from urljects import __version__
+from urljects.version import __version__
 
 long_description = """
 Django URL routing system DRYed.
