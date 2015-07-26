@@ -8,6 +8,28 @@ Django URL Objects = URLjects
 [![Join the chat at https://gitter.im/Visgean/urljects](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Visgean/urljects)
 
 
+Routing without urls.py
+-----------------------
+
+With the use of ``include_view()`` you can avoid using included ``urls.py``
+and include views directly. 
+
+For class based views simply inherit from ``URLView``.
+
+```python
+class ItemDetail(URLView, DetailView):
+    name = 'detail'
+    url = U / 'detail' / slug
+```
+
+a lot of people enjoy functional views, for those there is ``url_view`` decorator.
+
+```python
+@url_view(U / 'detail' / slug)
+def detail(request, slug)
+    ...
+```
+
 
 URLjects Patterns
 -----------------
@@ -35,25 +57,3 @@ The name of the view has been taken from ``DetailView.url_name``.
 There are also some common regular patterns like slugs and UUIDs so that you
 can focus on more important stuff than on debugging regular expressions.
 
-
-Routing without urls.py
------------------------
-
-With the use of ``include_view()`` you can avoid using included ``urls.py``
-and include views directly. 
-
-For class based views simply inherit from ``URLView``.
-
-```python
-class ItemDetail(URLView, DetailView):
-    name = 'detail'
-    url = U / 'detail' / slug
-```
-
-a lot of people enjoy functional views, for those there is ``url_view`` decorator.
-
-```python
-@url_view(U / 'detail' / slug)
-def detail(request, slug)
-    ...
-```
