@@ -88,6 +88,17 @@ class TestURL(unittest.TestCase):
             prefix=''
         )
 
+    @mock.patch('django.conf.urls.url')
+    def test_class_view(self, mocked_url):
+        url(U / 'class_view', view=views.ViewClass)
+        mocked_url.assert_called_once_with(
+            regex='^class_view$',
+            view=views.ViewClass.as_view(),
+            kwargs=None,
+            name=views.ViewClass.url_name,
+            prefix=''
+        )
+
 
 class TestAPP(unittest.TestCase):
     """
@@ -100,9 +111,6 @@ class TestAPP(unittest.TestCase):
 
     def test_function_view(self):
         self.assertEqual(reverse(viewname='test_view'), u'/test_view')
-
-    def test_class_view(self):
-        self.assertEqual(reverse(viewname='class_test_view'), u'/class_view')
 
     def test_included_views(self):
         self.assertEqual(reverse(viewname='included_view'),

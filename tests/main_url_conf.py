@@ -5,7 +5,6 @@ from urljects import U, I, url, view_include
 
 urlpatterns = [
     url(U / 'test_view', views.test_view),
-    url(U / 'class_view', views.ClassTestView),
 
     url(I / 'included', view_include(included_views)),
     url(I / 'included', view_include(included_views, namespace='named'))
