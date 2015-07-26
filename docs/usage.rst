@@ -1,5 +1,5 @@
-Three ways of routing
-=====================
+Using URLjects
+==============
 
 Under URLjects there are three main ways of urls. You should stick to one and
 avoid mixing them.
