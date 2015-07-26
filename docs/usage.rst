@@ -32,8 +32,8 @@ to directly import views to main urlconf. So your ``urlconf`` will look like thi
 ::
 
     urlpatterns = [
-        url(I / 'eshop', view_include(eshop_views)),
-        url(I / 'blog', view_include(blog_views, namespace='named'))
+        url(U / 'eshop', view_include(eshop_views)),
+        url(U / 'blog', view_include(blog_views, namespace='named'))
     ]
 
 Note that views have to either decorated with ``url_view`` function or for class
