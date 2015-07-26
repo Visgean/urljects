@@ -115,7 +115,7 @@ def view_include(view_module, namespace=None, app_name=None):
     :param view_module: object of the module or string with importable path
     :param namespace: name of the namespaces, it will be guessed otherwise
     :param app_name: application name
-    :return: result of url include
+    :return: result of urls.include
     """
 
     # since Django 1.8 patterns() are deprecated, list should be used instead
