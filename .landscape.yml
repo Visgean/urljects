@@ -5,6 +5,5 @@ uses:
 autodetect: yes
 requirements:
     - requirements.txt
-pylint:
-    disable:
-        - old-style-class
+ignore-paths:
+  - urljects/__init__.py
