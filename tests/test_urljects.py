@@ -61,6 +61,16 @@ class TestURLjects(unittest.TestCase):
         for pattern in patterns_to_compile:
             re.compile(pattern.get_value())
 
+    def test_compiled_pattern(self):
+        """
+            Tests that U object can work with compiled patterns
+        """
+
+        compiled_slug = re.compile(slug)
+        self.assertEqual(
+            (U / 'something' / compiled_slug).get_value(),
+            (U / 'something' / slug).get_value())
+
 
 class TestURL(unittest.TestCase):
     """
