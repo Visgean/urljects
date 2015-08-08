@@ -6,7 +6,7 @@ Django URL Objects = URLjects
 [![Pypi](https://img.shields.io/pypi/v/urljects.svg)](https://pypi.python.org/pypi/urljects)
 [![Code Health](https://landscape.io/github/Visgean/urljects/master/landscape.svg?style=flat)](https://landscape.io/github/Visgean/urljects/master)
 [![Requirements Status](https://requires.io/github/Visgean/urljects/requirements.svg?branch=master)](https://requires.io/github/Visgean/urljects/requirements/?branch=master)
-[![Join the chat at https://gitter.im/Visgean/urljects](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Visgean/urljects)
+[![Coverage Status](https://coveralls.io/repos/Visgean/urljects/badge.svg?branch=master&service=github)](https://coveralls.io/github/Visgean/urljects?branch=master)
 
 
 Routing without urls.py
