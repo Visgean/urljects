@@ -13,6 +13,8 @@ day = r'(?P<day>(0|1|2)?([1-9])|[1-3]0|31)'
 
 SEPARATOR = '/'  # separator for parts of the url
 
+RE_TYPE = re._pattern_type   # pylint:disable=protected-access
+
 
 class URLPattern(object):
     """
@@ -36,7 +38,7 @@ class URLPattern(object):
         Function for adding partial pattern to the value
         :param part: string or compiled pattern
         """
-        if isinstance(part, re._pattern_type):
+        if isinstance(part, RE_TYPE):
             part = part.pattern
 
         if self.value is None:

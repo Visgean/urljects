@@ -126,11 +126,12 @@ def view_include(view_module, namespace=None, app_name=None):
     if isinstance(view_module, six.string_types):
         view_module = importlib.import_module(view_module)
 
+    # pylint:disable=unused-variable
     for member_name, member in inspect.getmembers(view_module):
         is_class_view = inspect.isclass(member) and issubclass(member, URLView)
-        is_func_view = (inspect.isfunction(member)
-                        and hasattr(member, 'urljects_view')
-                        and member.urljects_view)
+        is_func_view = (inspect.isfunction(member) and
+                        hasattr(member, 'urljects_view') and
+                        member.urljects_view)
 
         if (is_class_view and member is not URLView) or is_func_view:
             view_patterns.append(url(member.url, member, name=member.url_name))
