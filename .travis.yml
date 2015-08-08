@@ -12,4 +12,8 @@ python:
 install: python setup.py install
 
 # command to run tests, e.g. python setup.py test
-script: python setup.py test
+script:
+ - coverage run --source=urljects setup.py test
+ - coverage report -m
+after_script:
+  coveralls

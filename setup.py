@@ -19,7 +19,7 @@ requirements = [
 
 test_requirements = [
     'mock',
-    'python-coveralls'
+    'coveralls'
 ]
 
 setup(
