@@ -43,6 +43,16 @@ class TestURLjects(unittest.TestCase):
         for url_test in test_data:
             self.assertEqual(url_test.old_url, url_test.new_url.get_value())
 
+    def test_str_method(self):
+        """
+        Test that __repr__ returns expected value
+        """
+
+        for url_test in test_data:
+            self.assertEqual(
+                url_test.new_url.__repr__(),
+                url_test.new_url.get_value())
+
     def test_compile(self):
         """
         Tests that U object can actually compile to regex
@@ -119,3 +129,10 @@ class TestAPP(unittest.TestCase):
 
         self.assertEqual(reverse(viewname='named:IncludedView'),
                          u'/included/IncludedView')
+
+    def test_string_included_views(self):
+        self.assertEqual(reverse(viewname='string_import:included_view'),
+                         u'/string/included_view')
+
+        self.assertEqual(reverse(viewname='string_import:IncludedView'),
+                         u'/string/IncludedView')
