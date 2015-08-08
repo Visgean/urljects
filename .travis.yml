@@ -13,6 +13,7 @@ install: python setup.py install
 
 # command to run tests, e.g. python setup.py test
 script:
+ - pip install coveralls mock
  - coverage run --source=urljects setup.py test
  - coverage report -m
 after_script:
