@@ -146,3 +146,10 @@ class TestAPP(unittest.TestCase):
 
         self.assertEqual(reverse(viewname='string_import:IncludedView'),
                          u'/string/IncludedView')
+
+    def test_wild_card(self):
+        self.assertEqual(reverse(viewname='wild_card:included_view'),
+                         u'/included_view')
+
+        self.assertEqual(reverse(viewname='wild_card:IncludedView'),
+                         u'/IncludedView')
