@@ -29,7 +29,7 @@ class URLPattern(object):
         :param separator: used to separate parts of the url, usually /
         :param ends: open urls should be used only for included urls
         """
-        self.value = value
+        self.parts = [value] if value else []
         self.separator = separator
         self.ends = ends
 
@@ -41,14 +41,14 @@ class URLPattern(object):
         if isinstance(part, RE_TYPE):
             part = part.pattern
 
-        if self.value is None:
+        if not self.parts:
             # This enables the U / '' syntax
             return URLPattern(
                 value=part,
                 separator=self.separator,
                 ends=self.ends)
         else:
-            self.value += self.separator + part
+            self.parts.append(part)
         return self
 
     def get_value(self, ends_override=None):
@@ -59,11 +59,13 @@ class URLPattern(object):
         :param ends_override: overrides ``self.ends``
         :return: raw string
         """
-        value = self.value
+        value = self.separator.join(self.parts)
         ends = ends_override if ends_override is not None else self.ends
 
-        if value is None:
-            value = beginning
+        if not value:  # use case: wild card imports
+            if ends:
+                return r'^$'
+            return r'^'
 
         if value[0] != beginning:
             value = beginning + value
