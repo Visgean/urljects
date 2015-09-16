@@ -56,3 +56,45 @@ Function based views:
 
 If you don't specify url name for functional views it will be derived from
 function name.
+
+
+
+Using the RouteMap
+----------------
+
+An alternative to ``URLView`` and ``@url_view`` is the RouteMap.
+
+The RouteMap is an object that maps URLs to routes. Usually, one is created
+in every view module, and named "route". With class and callable views,
+it's used as a decorator::
+
+    from urljects import RouteMap
+    route = RouteMap()
+
+    @route(U / 'post')
+    def post_view():
+        return render()
+
+    @route(U / 'detail', name='detail_view')
+    class DetailView(View):
+        pass
+
+It can also be used as a function, typically for view names as strings::
+
+    route(U / 'profile', 'users_app.views.profile_view')
+
+In urls.py, use the RouteMap's ``include`` method::
+
+    from my_app.blog.views import route as blog_routemap
+    urlpatterns = [
+        blog_routemap.include(U / 'blog')
+    ]
+
+The ``@route`` decorator may be used multiple times on a single view.
+The URLs it records are included in the order the views are defined in,
+or they can be given a priority::
+
+    @route(U / slug, priority=-1)
+    def post_view():
+        """ A catch-all view with low priority """
+        return render()
