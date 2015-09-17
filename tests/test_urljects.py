@@ -153,3 +153,16 @@ class TestAPP(unittest.TestCase):
 
         self.assertEqual(reverse(viewname='wild_card:IncludedView'),
                          u'/IncludedView')
+
+    def test_named_routed_views(self):
+        self.assertEqual(reverse(viewname='routed:RoutedView'),
+                         u'/routed/RoutedView')
+
+        self.assertEqual(reverse(viewname='routed:routed_view'),
+                         u'/routed/routed_view')
+
+        self.assertEqual(reverse(viewname='routed:aliased_view'),
+                         u'/routed/aliased_view')
+
+        self.assertEqual(reverse(viewname='routed:string_view'),
+                         u'/routed/string_view')
