@@ -3,6 +3,7 @@ import inspect
 import functools
 import importlib
 
+from collections import defaultdict
 from django.conf import urls
 from .patterns import URLPattern
 
@@ -17,9 +18,10 @@ class URLView(object):
 
     url = NotImplemented
     url_name = NotImplemented
+    url_priority = None
 
 
-def url_view(url_pattern, name=None):
+def url_view(url_pattern, name=None, priority=None):
     """
     Decorator for registering functional views.
     Meta decorator syntax has to be used in order to accept arguments.
@@ -44,6 +46,7 @@ def url_view(url_pattern, name=None):
 
     :param url_pattern: regex or URLPattern or anything passable to url()
     :param name: name of the view, __name__ will be used otherwise.
+    :param priority: priority of the view, the lower the better
     """
 
     def meta_wrapper(func):
@@ -54,6 +57,7 @@ def url_view(url_pattern, name=None):
         wrapper.urljects_view = True
         wrapper.url = url_pattern
         wrapper.url_name = name or func.__name__
+        wrapper.url_priority = priority
 
         return wrapper
     return meta_wrapper
@@ -121,7 +125,8 @@ def view_include(view_module, namespace=None, app_name=None):
     """
 
     # since Django 1.8 patterns() are deprecated, list should be used instead
-    view_patterns = []
+    # {priority:[views,]}
+    view_dict = defaultdict(list)
 
     if isinstance(view_module, six.string_types):
         view_module = importlib.import_module(view_module)
@@ -134,7 +139,12 @@ def view_include(view_module, namespace=None, app_name=None):
                         member.urljects_view)
 
         if (is_class_view and member is not URLView) or is_func_view:
-            view_patterns.append(url(member.url, member, name=member.url_name))
+            view_dict[member.url_priority].append(
+                url(member.url, member, name=member.url_name))
+
+    view_patterns = list(*[
+        view_dict[priority] for priority in sorted(view_dict)
+        ])
 
     return urls.include(
         arg=view_patterns,
