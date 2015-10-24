@@ -22,10 +22,10 @@ class RouteMap(object):
         :param url_pattern: regex or URLPattern or anything passable to url()
         :param view: The view. If None, a decorator will be returned
 
-        The remaining arguments should be givn by name:
+        The remaining arguments should be given by name:
 
         :param name: name of the view; resolve_name() will be used otherwise.
-        :param priority: priority for sorting; pass e.g. -1 for catch-all routes
+        :param priority: priority for sorting; pass e.g. -1 for catch-all route
         :param prefix: passed to url()
         :param kwargs: passed to url()
         """
@@ -58,6 +58,8 @@ class RouteMap(object):
         """
         sorted_entries = sorted(self.routes, key=operator.itemgetter(0),
                                 reverse=True)
+
+        # pylint:disable=unused-variable
         arg = [u for p, u in sorted_entries]
         return url(location, urls.include(
             arg=arg,
