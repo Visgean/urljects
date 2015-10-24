@@ -43,14 +43,15 @@ Class based views:
 ::
 
     class DetailView(View, URLView):
-        url_name = 'detail_view'
         url = U / 'detail' / slug
+        url_name = 'detail_view'
+        url_priority = -1
 
 
 Function based views:
 ::
 
-    @url_view(U / 'detail' / slug)
+    @url_view(U / 'detail' / slug, priority=-1)
     def detail_view(request):
         return render()
 
