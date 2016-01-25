@@ -11,7 +11,7 @@ python:
 env:
   - DJANGO_VERSION=1.8.7
   - DJANGO_VERSION=1.8.0
-  - DJANGO_VERSION=1.9rc2
+  - DJANGO_VERSION=1.9.1
 
 install:
  - pip install coveralls
