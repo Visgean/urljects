@@ -108,8 +108,7 @@ def url(url_pattern, view, kwargs=None, name=None):
         regex=url_pattern,
         view=view,
         kwargs=kwargs,
-        name=name,
-        )
+        name=name)
 
 
 def view_include(view_module, namespace=None, app_name=None):
