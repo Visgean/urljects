@@ -25,8 +25,8 @@ class RouteMap(object):
 
         :param name: name of the view; resolve_name() will be used otherwise.
         :param priority: priority for sorting; pass e.g. -1 for catch-all route
+        :param kwargs: passed to url()
         """
-
         def router_decorator(view):
             if name is None:
                 resolved_name = resolve_name(view)
@@ -54,8 +54,7 @@ class RouteMap(object):
         sorted_entries = sorted(self.routes, key=operator.itemgetter(0),
                                 reverse=True)
 
-        # pylint:disable=unused-variable
-        arg = [u for p, u in sorted_entries]
+        arg = [u for _, u in sorted_entries]
         return url(location, urls.include(
             arg=arg,
             namespace=namespace,
