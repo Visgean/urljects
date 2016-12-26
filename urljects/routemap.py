@@ -12,10 +12,9 @@ class RouteMap(object):
 
     def __init__(self):
         self.routes = []
-        self.default_prefix = ''
 
     def __call__(self, url_pattern, view=None, name=None, priority=0,
-                 prefix=None, kwargs=None):
+                 kwargs=None):
         """
         Register a URL -> view mapping, or return a registering decorator
 
@@ -26,11 +25,7 @@ class RouteMap(object):
 
         :param name: name of the view; resolve_name() will be used otherwise.
         :param priority: priority for sorting; pass e.g. -1 for catch-all route
-        :param prefix: passed to url()
-        :param kwargs: passed to url()
         """
-        if prefix is None:
-            prefix = self.default_prefix
 
         def router_decorator(view):
             if name is None:
@@ -38,7 +33,7 @@ class RouteMap(object):
             else:
                 resolved_name = name
             url_object = url(url_pattern, view, kwargs=kwargs,
-                             name=resolved_name, prefix=prefix)
+                             name=resolved_name)
             self.routes.append((priority, url_object))
             return view
 

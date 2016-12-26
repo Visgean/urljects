@@ -12,25 +12,19 @@ from urljects import U, slug, url
 from . import views
 
 
-URLTest = namedtuple('URLTest', ['old_url', 'new_url', 'view', 'name'])
+URLTest = namedtuple('URLTest', ['old_url', 'new_url'])
 test_data = [
     URLTest(
         old_url=r'^detail/(?P<slug>[\w-]+)$',
         new_url=U / 'detail' / slug,
-        view=None,
-        name=None
     ),
     URLTest(
         old_url=r'^(?P<slug>[\w-]+)$',
         new_url=U / slug,
-        view=None,
-        name=None
     ),
     URLTest(
         old_url=r'^static$',
         new_url=U / 'static',
-        view=None,
-        name=None
     ),
 ]
 
@@ -82,13 +76,12 @@ class TestURL(unittest.TestCase):
 
     @mock.patch('django.conf.urls.url')
     def test_func_view(self, mocked_url):
-        url(U, view=views.test_view, prefix='prefix')
+        url(U, view=views.test_view)
         mocked_url.assert_called_once_with(
             regex='^$',
             view=views.test_view,
             kwargs=None,
             name='test_view',
-            prefix='prefix'
         )
 
     @mock.patch('django.conf.urls.url')
@@ -99,7 +92,6 @@ class TestURL(unittest.TestCase):
             view='views.test_view',
             kwargs=None,
             name='test_view',
-            prefix=''
         )
 
     @mock.patch('django.conf.urls.url')
@@ -110,7 +102,6 @@ class TestURL(unittest.TestCase):
             view=views.ViewClass.as_view(),
             kwargs=None,
             name=views.ViewClass.url_name,
-            prefix=''
         )
 
 
@@ -140,13 +131,6 @@ class TestAPP(unittest.TestCase):
         self.assertEqual(reverse(viewname='named:IncludedView'),
                          u'/included/IncludedView')
 
-    def test_string_included_views(self):
-        self.assertEqual(reverse(viewname='string_import:included_view'),
-                         u'/string/included_view')
-
-        self.assertEqual(reverse(viewname='string_import:IncludedView'),
-                         u'/string/IncludedView')
-
     def test_wild_card(self):
         self.assertEqual(reverse(viewname='wild_card:included_view'),
                          u'/included_view')
@@ -163,6 +147,3 @@ class TestAPP(unittest.TestCase):
 
         self.assertEqual(reverse(viewname='routed:aliased_view'),
                          u'/routed/aliased_view')
-
-        self.assertEqual(reverse(viewname='routed:string_view'),
-                         u'/routed/string_view')

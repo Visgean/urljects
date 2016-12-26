@@ -27,7 +27,7 @@ def url_view(url_pattern, name=None, priority=None):
     Meta decorator syntax has to be used in order to accept arguments.
 
     This decorator does not really do anything that magical:
-    
+
     This:
     >>> from urljects import U, url_view
     >>> @url_view(U / 'my_view')
@@ -78,7 +78,7 @@ def resolve_name(view):
     return None
 
 
-def url(url_pattern, view, kwargs=None, name=None, prefix=''):
+def url(url_pattern, view, kwargs=None, name=None):
     """
     This is replacement for ``django.conf.urls.url`` function.
     This url auto calls ``as_view`` method for Class based views and resolves
@@ -109,7 +109,7 @@ def url(url_pattern, view, kwargs=None, name=None, prefix=''):
         view=view,
         kwargs=kwargs,
         name=name,
-        prefix=prefix)
+        )
 
 
 def view_include(view_module, namespace=None, app_name=None):

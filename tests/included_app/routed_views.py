@@ -14,8 +14,3 @@ class RoutedView(View):
 @route(U / 'aliased_view', name='aliased_view')
 def routed_view():
     pass
-
-route(U / 'string_view', 'tests.included_app.routed_views.string_view')
-
-def string_view():
-    pass
