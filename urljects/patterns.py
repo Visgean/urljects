@@ -17,10 +17,10 @@ RE_TYPE = re._pattern_type   # pylint:disable=protected-access
 
 
 class URLPattern(object):
-    """
-    This is the main urljects object, it is able to join strings and
-    regular expressions. The value of this object will always be regular
-    expression usable in django url.
+    """The main urljects object able to join strings and regular expressions.
+
+    The value of this object will always be regular expression usable in django
+    url.
     """
 
     def __init__(self, value=None, separator=SEPARATOR, ends=True):

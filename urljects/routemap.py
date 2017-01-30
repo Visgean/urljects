@@ -6,17 +6,14 @@ from .urljects import url, resolve_name
 
 
 class RouteMap(object):
-    """
-        Records mapping of URLs to views
-    """
+    """Records mapping of URLs to views."""
 
     def __init__(self):
         self.routes = []
 
     def __call__(self, url_pattern, view=None, name=None, priority=0,
                  kwargs=None):
-        """
-        Register a URL -> view mapping, or return a registering decorator
+        """Register a URL -> view mapping, or return a registering decorator.
 
         :param url_pattern: regex or URLPattern or anything passable to url()
         :param view: The view. If None, a decorator will be returned
