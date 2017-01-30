@@ -9,13 +9,26 @@ Django URL Objects = URLjects
 [![Coverage Status](https://coveralls.io/repos/Visgean/urljects/badge.svg?branch=master&service=github)](https://coveralls.io/github/Visgean/urljects?branch=master)
 
 
-Routing without urls.py
------------------------
+Getting rid of ``urls.py``
+--------------------------
 
-With the use of ``include_view()`` you can avoid using included ``urls.py``
-and include views directly. 
+With the use of ``include_view()`` you can avoid ``urls.py`` and include
+your app's views directly in root ``urls.py``.
 
-For class based views simply inherit from ``URLView``.
+```python
+    # inside your root urls.py
+    urlpatterns = [
+        # old style
+        url("myapp/", include("myapp.urls")),
+        # new urljects style
+        url("myapp/", view_include("myapp.views"))
+    ]
+```
+
+Soo how to define URLs directly into views?
+""""""""""""""""""""""""""""""""""""""""""""
+
+I am glad you asked! For class based views simply inherit from ``URLView``.
 
 ```python
 class ItemDetail(URLView, DetailView):
@@ -26,30 +39,30 @@ class ItemDetail(URLView, DetailView):
 a lot of people enjoy functional views, for those there is ``url_view`` decorator.
 
 ```python
-@url_view(U / 'detail' / slug)
-def detail(request, slug)
+@url_view(U / 'category' / rest)
+def detail(request, rest)
     ...
 ```
 
+After that you can user ``view_include`` instead of creating ``urls.py`` and
+then old-style ``include`` them afterwards.
 
-URLjects Patterns
------------------
 
-With URLjects you can write this
+Keeping ``urls.py``
+-------------------
+
+Quite often you need some ``urls.py`` - for example your root urls. Then you can
+use patterns like ``slug`` or ``rest`` as shown above inside your ``urls.py``.
+We even provide modified ``url`` function to strip away the boilerplate of
+``.as_view()``,
 
 ```python
 from urljects import U, slug, url
 
 url_patterns = (
     url(U / 'detail' / slug, view=DetailView),
-)
-```
-
-instead of this:
-
-```python 
-url_patterns = (
-    url(r'^detail/(?P<slug>[\w-]+)' , view=DetailView.as_view(), 
+    # instead of
+    url(r'^detail/(?P<slug>[\w-]+)' , view=DetailView.as_view(),
         name='detail'),
 )
 ```
