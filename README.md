@@ -1,5 +1,5 @@
-Django URL Objects = URLjects
-=============================
+# Django URL Objects = URLjects
+
 
 [![Travis CL](https://img.shields.io/travis/Visgean/urljects.svg)](https://travis-ci.org/Visgean/urljects)
 [![Documentation Status](https://readthedocs.org/projects/urljects/badge/?version=latest)](https://urljects.readthedocs.org/en/latest/)
@@ -9,13 +9,13 @@ Django URL Objects = URLjects
 [![Coverage Status](https://coveralls.io/repos/Visgean/urljects/badge.svg?branch=master&service=github)](https://coveralls.io/github/Visgean/urljects?branch=master)
 
 
-Getting rid of ``urls.py``
---------------------------
+## Getting rid of ``urls.py``
 
 With the use of ``include_view()`` you can avoid ``urls.py`` and include
 your app's views directly in root ``urls.py``.
 
 ```python
+    from urljects import view_include
     # inside your root urls.py
     urlpatterns = [
         # old style
@@ -25,8 +25,7 @@ your app's views directly in root ``urls.py``.
     ]
 ```
 
-Soo how to define URLs directly into views?
-""""""""""""""""""""""""""""""""""""""""""""
+#### Soo how to put urls directly into views?
 
 I am glad you asked! For class based views simply inherit from ``URLView``.
 
@@ -48,8 +47,8 @@ After that you can user ``view_include`` instead of creating ``urls.py`` and
 then old-style ``include`` them afterwards.
 
 
-Keeping ``urls.py``
--------------------
+## I want to keep my urls.py
+
 
 Quite often you need some ``urls.py`` - for example your root urls. Then you can
 use patterns like ``slug`` or ``rest`` as shown above inside your ``urls.py``.
