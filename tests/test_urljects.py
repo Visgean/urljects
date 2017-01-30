@@ -1,16 +1,18 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import
 
-import re
-import unittest
+import django
 import mock
 import os
+import re
+import unittest
 
 from django.core.urlresolvers import reverse
 from collections import namedtuple
 from urljects import U, slug, url
 from . import views
 
+DJANGO_GTE_1_10 = django.VERSION[:2] >= (1, 10)
 
 URLTest = namedtuple('URLTest', ['old_url', 'new_url'])
 test_data = [
@@ -31,35 +33,25 @@ test_data = [
 
 class TestURLjects(unittest.TestCase):
     def test_regulars(self):
-        """
-        Test that old_url is same as new_url
-        """
+        """Test that old_url is same as new_url."""
         for url_test in test_data:
             self.assertEqual(url_test.old_url, url_test.new_url.get_value())
 
     def test_str_method(self):
-        """
-        Test that __repr__ returns expected value
-        """
-
+        """Test that __repr__ returns expected value."""
         for url_test in test_data:
             self.assertEqual(
                 url_test.new_url.__repr__(),
                 url_test.new_url.get_value())
 
     def test_compile(self):
-        """
-        Tests that U object can actually compile to regex
-        """
+        """Tests that U object can actually compile to regex."""
         patterns_to_compile = (g.new_url for g in test_data)
         for pattern in patterns_to_compile:
             re.compile(pattern.get_value())
 
     def test_compiled_pattern(self):
-        """
-            Tests that U object can work with compiled patterns
-        """
-
+        """Tests that U object can work with compiled patterns."""
         compiled_slug = re.compile(slug)
         self.assertEqual(
             (U / 'something' / compiled_slug).get_value(),
@@ -84,6 +76,7 @@ class TestURL(unittest.TestCase):
             name='test_view',
         )
 
+    @unittest.skipIf(DJANGO_GTE_1_10, "Django >= 1.10 has deprecated string views")
     @mock.patch('django.conf.urls.url')
     def test_string_view(self, mocked_url):
         url(U / 'test', view='views.test_view')
@@ -106,8 +99,8 @@ class TestURL(unittest.TestCase):
 
 
 class TestAPP(unittest.TestCase):
-    """
-    This tests Django integration without mocking.
+    """Tests Django integration without mocking.
+
     URLs are registered in ``main_url_conf.py``
     """
 
@@ -120,30 +113,36 @@ class TestAPP(unittest.TestCase):
     def test_included_views(self):
         self.assertEqual(reverse(viewname='included_view'),
                          u'/included/included_view')
-
         self.assertEqual(reverse(viewname='IncludedView'),
                          u'/included/IncludedView')
 
     def test_named_included_views(self):
         self.assertEqual(reverse(viewname='named:included_view'),
                          u'/included/included_view')
-
         self.assertEqual(reverse(viewname='named:IncludedView'),
                          u'/included/IncludedView')
 
+    @unittest.skipIf(DJANGO_GTE_1_10, "Django >= 1.10 has deprecated string views")
+    def test_string_included_views(self):
+        self.assertEqual(reverse(viewname='string_import:included_view'),
+                         u'/string/included_view')
+        self.assertEqual(reverse(viewname='string_import:IncludedView'),
+                         u'/string/IncludedView')
+
+    @unittest.skipIf(DJANGO_GTE_1_10, "Django >= 1.10 has deprecated string views")
     def test_wild_card(self):
         self.assertEqual(reverse(viewname='wild_card:included_view'),
                          u'/included_view')
-
         self.assertEqual(reverse(viewname='wild_card:IncludedView'),
                          u'/IncludedView')
 
     def test_named_routed_views(self):
         self.assertEqual(reverse(viewname='routed:RoutedView'),
                          u'/routed/RoutedView')
-
         self.assertEqual(reverse(viewname='routed:routed_view'),
                          u'/routed/routed_view')
-
         self.assertEqual(reverse(viewname='routed:aliased_view'),
                          u'/routed/aliased_view')
+        if not DJANGO_GTE_1_10:
+            self.assertEqual(reverse(viewname='routed:string_view'),
+                             u'/routed/string_view')
