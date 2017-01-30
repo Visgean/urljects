@@ -57,6 +57,18 @@ class TestURLjects(unittest.TestCase):
             (U / 'something' / compiled_slug).get_value(),
             (U / 'something' / slug).get_value())
 
+    def test_separated_values(self):
+        """Tests that separator in values does not lead to double-separated url."""
+        self.assertEqual(
+            (U / '/something').get_value(),
+            (U / 'something').get_value())
+        self.assertEqual(
+            (U / 'something' / '/else').get_value(),
+            (U / 'something' / 'else').get_value())
+        self.assertEqual(
+            (U / '/something' / '/else').get_value(),
+            (U / 'something' / 'else').get_value())
+
 
 class TestURL(unittest.TestCase):
     """

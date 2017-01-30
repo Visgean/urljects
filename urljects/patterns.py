@@ -30,7 +30,7 @@ class URLPattern(object):
         :param separator: used to separate parts of the url, usually /
         :param ends: open urls should be used only for included urls
         """
-        self.parts = [value] if value else []
+        self.parts = [value.strip(separator)] if value else []
         self.separator = separator
         self.ends = ends
 
@@ -49,7 +49,10 @@ class URLPattern(object):
                 separator=self.separator,
                 ends=self.ends)
         else:
-            self.parts.append(part)
+            # stripping separator enables translated urls with hint what
+            # string is actual url and which is a normal word
+            # url(U / _('/my-profile'), private.Home, name="admin-home"),
+            self.parts.append(part.strip(self.separator))
         return self
 
     def get_value(self, ends_override=None):
