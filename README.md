@@ -8,6 +8,14 @@
 [![Requirements Status](https://requires.io/github/Visgean/urljects/requirements.svg?branch=master)](https://requires.io/github/Visgean/urljects/requirements/?branch=master)
 [![Coverage Status](https://coveralls.io/repos/Visgean/urljects/badge.svg?branch=master&service=github)](https://coveralls.io/github/Visgean/urljects?branch=master)
 
+Library which greatly simplifies django urls definition! And as a side effect it makes translated urls amazingly easy. Just compare
+
+```python
+# old urls notation
+url('^detail/(?<slug>[\w-]+)', MyDetailView.as_view(), name='detail')
+# easified !even translated! notation
+url(U / _('detail') / slug, MyDetailView, name='detail')
+```
 
 ## Getting rid of ``urls.py``
 
@@ -27,17 +35,23 @@ your app's views directly in root ``urls.py``.
 
 #### Soo how to put urls directly into views?
 
-I am glad you asked! For class based views simply inherit from ``URLView``.
+I am glad you asked! For class based views simply inherit from ``URLView`` and add
+``name`` and ``url`` as their attributes.
 
 ```python
+from urljects import URLView, U, slug
+from django.views.generic import DetailView
+
 class ItemDetail(URLView, DetailView):
     name = 'detail'
     url = U / 'detail' / slug
 ```
 
-a lot of people enjoy functional views, for those there is ``url_view`` decorator.
+A lot of people enjoy functional views, for those there is ``url_view`` decorator.
 
 ```python
+from urljects import url_view
+
 @url_view(U / 'category' / rest)
 def detail(request, rest)
     ...
@@ -48,7 +62,6 @@ then old-style ``include`` them afterwards.
 
 
 ## I want to keep my urls.py
-
 
 Quite often you need some ``urls.py`` - for example your root urls. Then you can
 use patterns like ``slug`` or ``rest`` as shown above inside your ``urls.py``.
