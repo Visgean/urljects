@@ -3,7 +3,7 @@ from django.views.generic.base import View
 
 from urljects import RouteMap, U
 
-DJANGO_GTE_1_10 = django.VERSION[:2] >= (1, 10)
+DJANGO_GTE_1_9 = django.VERSION[:2] >= (1, 9)
 
 route = RouteMap()
 
@@ -22,5 +22,5 @@ def routed_view():
 def string_view():
     pass
 
-if not DJANGO_GTE_1_10:
+if not DJANGO_GTE_1_9:
     route(U / 'string_view', 'tests.included_app.routed_views.string_view')

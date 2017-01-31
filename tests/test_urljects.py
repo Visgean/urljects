@@ -12,7 +12,7 @@ from collections import namedtuple
 from urljects import U, slug, url
 from . import views
 
-DJANGO_GTE_1_10 = django.VERSION[:2] >= (1, 10)
+DJANGO_GTE_1_9 = django.VERSION[:2] >= (1, 9)
 
 URLTest = namedtuple('URLTest', ['old_url', 'new_url'])
 test_data = [
@@ -88,7 +88,7 @@ class TestURL(unittest.TestCase):
             name='test_view',
         )
 
-    @unittest.skipIf(DJANGO_GTE_1_10, "Django >= 1.10 has deprecated string views")
+    @unittest.skipIf(DJANGO_GTE_1_9, "Django >= 1.9 has deprecated string views")
     @mock.patch('django.conf.urls.url')
     def test_string_view(self, mocked_url):
         url(U / 'test', view='views.test_view')
@@ -134,14 +134,14 @@ class TestAPP(unittest.TestCase):
         self.assertEqual(reverse(viewname='named:IncludedView'),
                          u'/included/IncludedView')
 
-    @unittest.skipIf(DJANGO_GTE_1_10, "Django >= 1.10 has deprecated string views")
+    @unittest.skipIf(DJANGO_GTE_1_9, "Django >= 1.9 has deprecated string views")
     def test_string_included_views(self):
         self.assertEqual(reverse(viewname='string_import:included_view'),
                          u'/string/included_view')
         self.assertEqual(reverse(viewname='string_import:IncludedView'),
                          u'/string/IncludedView')
 
-    @unittest.skipIf(DJANGO_GTE_1_10, "Django >= 1.10 has deprecated string views")
+    @unittest.skipIf(DJANGO_GTE_1_9, "Django >= 1.9 has deprecated string views")
     def test_wild_card(self):
         self.assertEqual(reverse(viewname='wild_card:included_view'),
                          u'/included_view')
@@ -155,6 +155,6 @@ class TestAPP(unittest.TestCase):
                          u'/routed/routed_view')
         self.assertEqual(reverse(viewname='routed:aliased_view'),
                          u'/routed/aliased_view')
-        if not DJANGO_GTE_1_10:
+        if not DJANGO_GTE_1_9:
             self.assertEqual(reverse(viewname='routed:string_view'),
                              u'/routed/string_view')
