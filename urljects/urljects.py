@@ -90,7 +90,6 @@ def url(url_pattern, view, kwargs=None, name=None):
     :param view: function/string/class of the view
     :param kwargs: kwargs that are to be passed to view
     :param name: name of the view, if empty it will be guessed
-    :param prefix: useless, use namespaces
     """
     if isinstance(url_pattern, URLPattern):
         if isinstance(view, tuple):  # this is included view
@@ -108,8 +107,7 @@ def url(url_pattern, view, kwargs=None, name=None):
         regex=url_pattern,
         view=view,
         kwargs=kwargs,
-        name=name,
-        )
+        name=name)
 
 
 def view_include(view_module, namespace=None, app_name=None):

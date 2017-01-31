@@ -6,6 +6,7 @@ end = r'$'
 slug = r'(?P<slug>[\w-]+)'
 pk = '(?P<pk>\d+)'
 uuid4 = '(?P<uuid4>[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12})'  # noqa
+rest = '(?P<rest>[\w\-\_\.\@\:/]*)'  # match anything acceptable in URL
 
 year = r'(?P<year>\d{4})'
 month = r'(?P<month>0?([1-9])|10|11|12)'
@@ -17,10 +18,10 @@ RE_TYPE = re._pattern_type   # pylint:disable=protected-access
 
 
 class URLPattern(object):
-    """
-    This is the main urljects object, it is able to join strings and
-    regular expressions. The value of this object will always be regular
-    expression usable in django url.
+    """The main urljects object able to join strings and regular expressions.
+
+    The value of this object will always be regular expression usable in django
+    url.
     """
 
     def __init__(self, value=None, separator=SEPARATOR, ends=True):
@@ -29,7 +30,7 @@ class URLPattern(object):
         :param separator: used to separate parts of the url, usually /
         :param ends: open urls should be used only for included urls
         """
-        self.parts = [value] if value else []
+        self.parts = [value.strip(separator)] if value else []
         self.separator = separator
         self.ends = ends
 
@@ -48,7 +49,10 @@ class URLPattern(object):
                 separator=self.separator,
                 ends=self.ends)
         else:
-            self.parts.append(part)
+            # stripping separator enables translated urls with hint what
+            # string is actual url and which is a normal word
+            # url(U / _('/my-profile'), private.Home, name="admin-home"),
+            self.parts.append(part.strip(self.separator))
         return self
 
     def get_value(self, ends_override=None):
