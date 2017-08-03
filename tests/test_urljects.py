@@ -35,39 +35,39 @@ class TestURLjects(unittest.TestCase):
     def test_regulars(self):
         """Test that old_url is same as new_url."""
         for url_test in test_data:
-            self.assertEqual(url_test.old_url, url_test.new_url.get_value())
+            self.assertEqual(url_test.old_url, url_test.new_url)
 
     def test_str_method(self):
         """Test that __repr__ returns expected value."""
         for url_test in test_data:
             self.assertEqual(
                 url_test.new_url.__repr__(),
-                url_test.new_url.get_value())
+                url_test.new_url)
 
     def test_compile(self):
         """Tests that U object can actually compile to regex."""
         patterns_to_compile = (g.new_url for g in test_data)
         for pattern in patterns_to_compile:
-            re.compile(pattern.get_value())
+            re.compile(pattern)
 
     def test_compiled_pattern(self):
         """Tests that U object can work with compiled patterns."""
         compiled_slug = re.compile(slug)
         self.assertEqual(
-            (U / 'something' / compiled_slug).get_value(),
-            (U / 'something' / slug).get_value())
+            (U / 'something' / compiled_slug),
+            (U / 'something' / slug))
 
     def test_separated_values(self):
         """Tests that separator in values does not lead to double-separated url."""
         self.assertEqual(
-            (U / '/something').get_value(),
-            (U / 'something').get_value())
+            (U / '/something'),
+            (U / 'something'))
         self.assertEqual(
-            (U / 'something' / '/else').get_value(),
-            (U / 'something' / 'else').get_value())
+            (U / 'something' / '/else'),
+            (U / 'something' / 'else'))
         self.assertEqual(
-            (U / '/something' / '/else').get_value(),
-            (U / 'something' / 'else').get_value())
+            (U / '/something' / '/else'),
+            (U / 'something' / 'else'))
 
 
 class TestURL(unittest.TestCase):

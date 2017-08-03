@@ -95,7 +95,7 @@ def url(url_pattern, view, kwargs=None, name=None):
         if isinstance(view, tuple):  # this is included view
             url_pattern = url_pattern.get_value(ends_override=False)
         else:
-            url_pattern = url_pattern.get_value()
+            url_pattern = url_pattern
 
     if name is None:
         name = resolve_name(view)
