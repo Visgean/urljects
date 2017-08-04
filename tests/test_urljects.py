@@ -38,10 +38,10 @@ class TestURLjects(unittest.TestCase):
             self.assertEqual(url_test.old_url, url_test.new_url)
 
     def test_str_method(self):
-        """Test that __repr__ returns expected value."""
+        """Test that stringification returns expected value."""
         for url_test in test_data:
             self.assertEqual(
-                url_test.new_url.__repr__(),
+                str(url_test.new_url),
                 url_test.new_url)
 
     def test_compile(self):
@@ -61,13 +61,13 @@ class TestURLjects(unittest.TestCase):
         """Tests that separator in values does not lead to double-separated url."""
         self.assertEqual(
             (U / '/something'),
-            (U / 'something'))
+            '^/something$')
         self.assertEqual(
             (U / 'something' / '/else'),
             (U / 'something' / 'else'))
         self.assertEqual(
             (U / '/something' / '/else'),
-            (U / 'something' / 'else'))
+            '^/something/else$')
 
 
 class TestURL(unittest.TestCase):

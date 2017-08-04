@@ -17,32 +17,23 @@ SEPARATOR = '/'  # separator for parts of the url
 RE_TYPE = re._pattern_type   # pylint:disable=protected-access
 
 
-def render(parts, separator=SEPARATOR, ends=True):
+def render(value):
     """
     This function finishes the url pattern creation by adding starting
     character ^ end possibly by adding end character at the end
 
-    :param parts: URL parts
-    :param separator: used to separate parts of the url, usually /
-    :param ends: open urls should be used only for included urls
+    :param value: naive URL value
     :return: raw string
     """
-    value = separator.join(parts)
-
+    # Empty urls
     if not value:  # use case: wild card imports
-        if ends:
-            return r'^$'
-        return r'^'
+        return r'^$'
 
     if value[0] != beginning:
         value = beginning + value
 
-    if ends and value[-1] != end:
+    if value[-1] != end:
         value += end
-
-    # included views usually ends with separator
-    if not ends and value[-1] != separator:
-        value += separator
 
     return value
 
@@ -53,17 +44,13 @@ class URLPattern(str):
     The value of this object will always be regular expression usable in django
     url.
     """
-    def __new__(cls, value='', separator=SEPARATOR, ends=True):
+    def __new__(cls, value='', separator=SEPARATOR):
         """
         :param value: Initial value of the URL
         :param separator: used to separate parts of the url, usually /
-        :param ends: open urls should be used only for included urls
         """
-        parts = (value.strip(separator),) if value else ()
-        self = str.__new__(cls, render(parts, separator, ends))
-        self.parts = parts
+        self = str.__new__(cls, render(value))
         self.separator = separator
-        self.ends = ends
         return self
 
     def add_part(self, part):
@@ -74,41 +61,20 @@ class URLPattern(str):
         if isinstance(part, RE_TYPE):
             part = part.pattern
 
-        if not self.parts:
-            # This enables the U / '' syntax
-            return URLPattern(
-                value=part,
-                separator=self.separator,
-                ends=self.ends)
+        # Allow U / spmething syntax
+        if self == '^$':
+            return URLPattern(part, self.separator)
         else:
-            # stripping separator enables translated urls with hint what
-            # string is actual url and which is a normal word
-            # url(U / _('/my-profile'), private.Home, name="admin-home"),
-            parts = self.parts + (part.strip(self.separator),)
-            return URLPattern(
-                value=self.separator.join(parts),
-                separator=self.separator,
-                ends=self.ends)
-        return self
+            # Erase dup separator inbetween
+            sep = self.separator
+            return URLPattern(self.rstrip('$' + sep) + sep + part.lstrip(sep),
+                              sep)
 
-    def get_value(self, ends_override=None):
-        ends = self.ends if ends_override is None else ends_override
-        return render(self.parts, self.separator, ends)
+    # Python 2 and 3 division
+    __div__ = __truediv__ = add_part
 
-    def __div__(self, other):
-        """
-        PY2 division
-        """
-        return self.add_part(other)
-
-    def __truediv__(self, other):
-        """
-        PY3 division
-        """
-        return self.add_part(other)
-
-    def __repr__(self):
-        return self or ''
+    def for_include(self):
+        return self.rstrip('$' + self.separator) + self.separator
 
 
 U = URLPattern()
