@@ -91,11 +91,9 @@ def url(url_pattern, view, kwargs=None, name=None):
     :param kwargs: kwargs that are to be passed to view
     :param name: name of the view, if empty it will be guessed
     """
-    if isinstance(url_pattern, URLPattern):
-        if isinstance(view, tuple):  # this is included view
-            url_pattern = url_pattern.get_value(ends_override=False)
-        else:
-            url_pattern = url_pattern.get_value()
+    # Special handling for included view
+    if isinstance(url_pattern, URLPattern) and isinstance(view, tuple):
+        url_pattern = url_pattern.for_include()
 
     if name is None:
         name = resolve_name(view)
