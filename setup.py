@@ -24,7 +24,7 @@ test_requirements = [
 
 setup(
     name='urljects',
-    version='1.10.4',
+    version='1.11',
     description="Django URLS DRYed.",
     long_description=long_description,
     author="Visgean Skeloru",
