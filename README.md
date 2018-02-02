@@ -1,4 +1,8 @@
-# Django URL Objects = URLjects
+# Django URL Objects = URLjects - Deprecated 
+
+# This project is not maintained anymore
+
+Since Django 2.0 introduced new system of routing I dont think kind of approach is desired anymore. 
 
 
 [![Travis CL](https://img.shields.io/travis/Visgean/urljects.svg)](https://travis-ci.org/Visgean/urljects)
