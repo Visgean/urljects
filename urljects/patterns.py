@@ -14,8 +14,10 @@ day = r'(?P<day>(0|1|2)?([1-9])|[1-3]0|31)'
 
 SEPARATOR = '/'  # separator for parts of the url
 
-RE_TYPE = re._pattern_type   # pylint:disable=protected-access
-
+try:
+    RE_TYPE = re._pattern_type   # pylint:disable=protected-access
+except:
+    RE_TYPE = re.Pattern  #  > 3.7
 
 def render(value):
     """
