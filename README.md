@@ -1,4 +1,4 @@
-# Django URL Objects = URLjects - This project is no longer maintained
+# URLjects - project no longer maintained
 
 Since Django 2.0 introduced new system of routing I dont think kind of approach is desired anymore. 
 
